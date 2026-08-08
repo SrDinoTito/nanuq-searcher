@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{.InstanceName}} - search</title>
+</head>
+<body>
+  <main>
+    <h1>{{.InstanceName}}</h1>
+    <form method="get" action="/search">
+      <label for="q">Search</label>
+      <input type="search" id="q" name="q" placeholder="search the web..." autofocus required>
+      <button type="submit">Search</button>
+    </form>
+  </main>
+</body>
+</html>

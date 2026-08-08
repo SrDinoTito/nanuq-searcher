@@ -1,0 +1,66 @@
+{
+  "search.placeholder": {
+    "other": "search the web..."
+  },
+  "search.submit": {
+    "other": "Search"
+  },
+  "search.title": {
+    "other": "search"
+  },
+  "results.title": {
+    "other": "search results"
+  },
+  "results.for_query": {
+    "other": "Results for {{.Query}}"
+  },
+  "results.count": {
+    "one": "{{.Count}} result for \"{{.Query}}\"",
+    "other": "{{.Count}} results for \"{{.Query}}\""
+  },
+  "results.no_results": {
+    "other": "No results found."
+  },
+  "results.unresponsive": {
+    "other": "Unresponsive engines"
+  },
+  "error.access_denied": {
+    "other": "Access denied"
+  },
+  "error.too_many_requests": {
+    "other": "Too many requests"
+  },
+  "error.timeout": {
+    "other": "Timeout"
+  },
+  "error.cf_browser": {
+    "other": "Cloudflare challenge"
+  },
+  "page.title": {
+    "other": "{{.InstanceName}} - search"
+  },
+  "about.tagline": {
+    "other": "{{.InstanceName}} is a private, privacy-respecting metasearch engine."
+  },
+  "preferences.heading": {
+    "other": "Preferences"
+  },
+  "preferences.back": {
+    "other": "back to search"
+  },
+  "preferences.instance_name": {
+    "other": "Instance name"
+  },
+  "stats.heading": {
+    "other": "Statistics"
+  },
+  "stats.none": {
+    "other": "No statistics are available yet."
+  },
+  "stats_errors.heading": {
+    "other": "Engine errors"
+  },
+  "stats_errors.none": {
+    "other": "No engine errors recorded."
+  }
+}

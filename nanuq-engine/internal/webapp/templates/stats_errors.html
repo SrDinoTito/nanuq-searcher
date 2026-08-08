@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{.InstanceName}} - engine errors</title>
+</head>
+<body>
+  <header>
+    <h1>{{.InstanceName}}</h1>
+    <nav><a href="/">back to search</a></nav>
+  </header>
+  <main>
+    <h2>Engine errors</h2>
+    <!-- TODO (TASK-020): per-engine error logs arrive in FASE F; the list is empty for now. -->
+    {{if .Errors}}
+    <ul>
+      {{range .Errors}}
+      <li>{{.}}</li>
+      {{end}}
+    </ul>
+    {{else}}
+    <p>No engine errors recorded.</p>
+    {{end}}
+  </main>
+</body>
+</html>

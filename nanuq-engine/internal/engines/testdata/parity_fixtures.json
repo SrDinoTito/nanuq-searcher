@@ -1,0 +1,805 @@
+{
+  "calculate_score": [
+    {
+      "name": "single_position_weight1",
+      "weight": 1.0,
+      "positions": [1],
+      "want": 1
+    },
+    {
+      "name": "positions_1_3_weight1",
+      "weight": 1.0,
+      "positions": [1, 3],
+      "want": 1.3333333333333333
+    },
+    {
+      "name": "positions_2_3_5_weight1",
+      "weight": 1.0,
+      "positions": [2, 3, 5],
+      "want": 1.0333333333333332
+    },
+    {
+      "name": "positions_1_2_weight_half",
+      "weight": 0.5,
+      "positions": [1, 2],
+      "want": 0.75
+    },
+    {
+      "name": "position_3_weight2",
+      "weight": 2.0,
+      "positions": [3],
+      "want": 0.66666666666666663
+    },
+    {
+      "name": "empty_positions",
+      "weight": 1.0,
+      "positions": [],
+      "want": 0
+    },
+    {
+      "name": "positions_4_7_weight_half",
+      "weight": 0.5,
+      "positions": [4, 7],
+      "want": 0.19642857142857142
+    }
+  ],
+  "ordered": [
+    {
+      "name": "score_desc",
+      "comment": "Three results, one category (general), unsorted input. get_ordered_results sorts by score descending (results.py L202) and, being stable, keeps extend order for ties. Expect high(9.0), mid(5.0), low(1.0).",
+      "results": [
+        {
+          "title": "low score result",
+          "url": "https://example.org/low",
+          "category": "general",
+          "template": "default.html",
+          "img_src": "",
+          "score": 1.0,
+          "positions": [1]
+        },
+        {
+          "title": "high score result",
+          "url": "https://example.org/high",
+          "category": "general",
+          "template": "default.html",
+          "img_src": "",
+          "score": 9.0,
+          "positions": [1]
+        },
+        {
+          "title": "mid score result",
+          "url": "https://example.org/mid",
+          "category": "general",
+          "template": "default.html",
+          "img_src": "",
+          "score": 5.0,
+          "positions": [1]
+        }
+      ],
+      "want": [
+        "https://example.org/high",
+        "https://example.org/mid",
+        "https://example.org/low"
+      ]
+    },
+    {
+      "name": "max_count8_nine_together",
+      "comment": "Nine results of one category (general) with descending scores. A cluster starts with max_count=8 capacity (results.py L199/L207) and absorbs its initial result plus 8 inserts, so all nine stay in ONE consecutive cluster in the output order.",
+      "results": [
+        {
+          "title": "r1",
+          "url": "https://example.org/max9/r1",
+          "category": "general",
+          "template": "default.html",
+          "img_src": "",
+          "score": 90.0,
+          "positions": [1]
+        },
+        {
+          "title": "r2",
+          "url": "https://example.org/max9/r2",
+          "category": "general",
+          "template": "default.html",
+          "img_src": "",
+          "score": 85.0,
+          "positions": [1]
+        },
+        {
+          "title": "r3",
+          "url": "https://example.org/max9/r3",
+          "category": "general",
+          "template": "default.html",
+          "img_src": "",
+          "score": 80.0,
+          "positions": [1]
+        },
+        {
+          "title": "r4",
+          "url": "https://example.org/max9/r4",
+          "category": "general",
+          "template": "default.html",
+          "img_src": "",
+          "score": 75.0,
+          "positions": [1]
+        },
+        {
+          "title": "r5",
+          "url": "https://example.org/max9/r5",
+          "category": "general",
+          "template": "default.html",
+          "img_src": "",
+          "score": 70.0,
+          "positions": [1]
+        },
+        {
+          "title": "r6",
+          "url": "https://example.org/max9/r6",
+          "category": "general",
+          "template": "default.html",
+          "img_src": "",
+          "score": 65.0,
+          "positions": [1]
+        },
+        {
+          "title": "r7",
+          "url": "https://example.org/max9/r7",
+          "category": "general",
+          "template": "default.html",
+          "img_src": "",
+          "score": 60.0,
+          "positions": [1]
+        },
+        {
+          "title": "r8",
+          "url": "https://example.org/max9/r8",
+          "category": "general",
+          "template": "default.html",
+          "img_src": "",
+          "score": 55.0,
+          "positions": [1]
+        },
+        {
+          "title": "r9",
+          "url": "https://example.org/max9/r9",
+          "category": "general",
+          "template": "default.html",
+          "img_src": "",
+          "score": 50.0,
+          "positions": [1]
+        }
+      ],
+      "want": [
+        "https://example.org/max9/r1",
+        "https://example.org/max9/r2",
+        "https://example.org/max9/r3",
+        "https://example.org/max9/r4",
+        "https://example.org/max9/r5",
+        "https://example.org/max9/r6",
+        "https://example.org/max9/r7",
+        "https://example.org/max9/r8",
+        "https://example.org/max9/r9"
+      ]
+    },
+    {
+      "name": "max_count8_tenth_new_group",
+      "comment": "Ten results of one category. The cluster holds the initial result plus max_count=8 inserts = 9 items; the TENTH same-group result finds count==0 and starts a new cluster appended at the end (results.py L228-232). Output order remains r1..r10.",
+      "results": [
+        {
+          "title": "r1",
+          "url": "https://example.org/max10/r1",
+          "category": "general",
+          "template": "default.html",
+          "img_src": "",
+          "score": 100.0,
+          "positions": [1]
+        },
+        {
+          "title": "r2",
+          "url": "https://example.org/max10/r2",
+          "category": "general",
+          "template": "default.html",
+          "img_src": "",
+          "score": 95.0,
+          "positions": [1]
+        },
+        {
+          "title": "r3",
+          "url": "https://example.org/max10/r3",
+          "category": "general",
+          "template": "default.html",
+          "img_src": "",
+          "score": 90.0,
+          "positions": [1]
+        },
+        {
+          "title": "r4",
+          "url": "https://example.org/max10/r4",
+          "category": "general",
+          "template": "default.html",
+          "img_src": "",
+          "score": 85.0,
+          "positions": [1]
+        },
+        {
+          "title": "r5",
+          "url": "https://example.org/max10/r5",
+          "category": "general",
+          "template": "default.html",
+          "img_src": "",
+          "score": 80.0,
+          "positions": [1]
+        },
+        {
+          "title": "r6",
+          "url": "https://example.org/max10/r6",
+          "category": "general",
+          "template": "default.html",
+          "img_src": "",
+          "score": 75.0,
+          "positions": [1]
+        },
+        {
+          "title": "r7",
+          "url": "https://example.org/max10/r7",
+          "category": "general",
+          "template": "default.html",
+          "img_src": "",
+          "score": 70.0,
+          "positions": [1]
+        },
+        {
+          "title": "r8",
+          "url": "https://example.org/max10/r8",
+          "category": "general",
+          "template": "default.html",
+          "img_src": "",
+          "score": 65.0,
+          "positions": [1]
+        },
+        {
+          "title": "r9",
+          "url": "https://example.org/max10/r9",
+          "category": "general",
+          "template": "default.html",
+          "img_src": "",
+          "score": 60.0,
+          "positions": [1]
+        },
+        {
+          "title": "r10",
+          "url": "https://example.org/max10/r10",
+          "category": "general",
+          "template": "default.html",
+          "img_src": "",
+          "score": 55.0,
+          "positions": [1]
+        }
+      ],
+      "want": [
+        "https://example.org/max10/r1",
+        "https://example.org/max10/r2",
+        "https://example.org/max10/r3",
+        "https://example.org/max10/r4",
+        "https://example.org/max10/r5",
+        "https://example.org/max10/r6",
+        "https://example.org/max10/r7",
+        "https://example.org/max10/r8",
+        "https://example.org/max10/r9",
+        "https://example.org/max10/r10"
+      ]
+    },
+    {
+      "name": "max_distance19_stays_in_group",
+      "comment": "a2 (general) scores below all image results, so after sorting it trails 19 positions behind the general cluster (len=20, index=1, distance 19 < max_distance=20, results.py L215). It is INSERTED at the cluster position: [a1, a2, b1..b19].",
+      "results": [
+        {
+          "title": "a1",
+          "url": "https://example.org/dist/a1",
+          "category": "general",
+          "template": "default.html",
+          "img_src": "",
+          "score": 100.0,
+          "positions": [1]
+        },
+        {
+          "title": "b1",
+          "url": "https://example.org/dist/b1",
+          "category": "images",
+          "template": "default.html",
+          "img_src": "",
+          "score": 99.0,
+          "positions": [1]
+        },
+        {
+          "title": "b2",
+          "url": "https://example.org/dist/b2",
+          "category": "images",
+          "template": "default.html",
+          "img_src": "",
+          "score": 98.0,
+          "positions": [1]
+        },
+        {
+          "title": "b3",
+          "url": "https://example.org/dist/b3",
+          "category": "images",
+          "template": "default.html",
+          "img_src": "",
+          "score": 97.0,
+          "positions": [1]
+        },
+        {
+          "title": "b4",
+          "url": "https://example.org/dist/b4",
+          "category": "images",
+          "template": "default.html",
+          "img_src": "",
+          "score": 96.0,
+          "positions": [1]
+        },
+        {
+          "title": "b5",
+          "url": "https://example.org/dist/b5",
+          "category": "images",
+          "template": "default.html",
+          "img_src": "",
+          "score": 95.0,
+          "positions": [1]
+        },
+        {
+          "title": "b6",
+          "url": "https://example.org/dist/b6",
+          "category": "images",
+          "template": "default.html",
+          "img_src": "",
+          "score": 94.0,
+          "positions": [1]
+        },
+        {
+          "title": "b7",
+          "url": "https://example.org/dist/b7",
+          "category": "images",
+          "template": "default.html",
+          "img_src": "",
+          "score": 93.0,
+          "positions": [1]
+        },
+        {
+          "title": "b8",
+          "url": "https://example.org/dist/b8",
+          "category": "images",
+          "template": "default.html",
+          "img_src": "",
+          "score": 92.0,
+          "positions": [1]
+        },
+        {
+          "title": "b9",
+          "url": "https://example.org/dist/b9",
+          "category": "images",
+          "template": "default.html",
+          "img_src": "",
+          "score": 91.0,
+          "positions": [1]
+        },
+        {
+          "title": "b10",
+          "url": "https://example.org/dist/b10",
+          "category": "images",
+          "template": "default.html",
+          "img_src": "",
+          "score": 90.0,
+          "positions": [1]
+        },
+        {
+          "title": "b11",
+          "url": "https://example.org/dist/b11",
+          "category": "images",
+          "template": "default.html",
+          "img_src": "",
+          "score": 89.0,
+          "positions": [1]
+        },
+        {
+          "title": "b12",
+          "url": "https://example.org/dist/b12",
+          "category": "images",
+          "template": "default.html",
+          "img_src": "",
+          "score": 88.0,
+          "positions": [1]
+        },
+        {
+          "title": "b13",
+          "url": "https://example.org/dist/b13",
+          "category": "images",
+          "template": "default.html",
+          "img_src": "",
+          "score": 87.0,
+          "positions": [1]
+        },
+        {
+          "title": "b14",
+          "url": "https://example.org/dist/b14",
+          "category": "images",
+          "template": "default.html",
+          "img_src": "",
+          "score": 86.0,
+          "positions": [1]
+        },
+        {
+          "title": "b15",
+          "url": "https://example.org/dist/b15",
+          "category": "images",
+          "template": "default.html",
+          "img_src": "",
+          "score": 85.0,
+          "positions": [1]
+        },
+        {
+          "title": "b16",
+          "url": "https://example.org/dist/b16",
+          "category": "images",
+          "template": "default.html",
+          "img_src": "",
+          "score": 84.0,
+          "positions": [1]
+        },
+        {
+          "title": "b17",
+          "url": "https://example.org/dist/b17",
+          "category": "images",
+          "template": "default.html",
+          "img_src": "",
+          "score": 83.0,
+          "positions": [1]
+        },
+        {
+          "title": "b18",
+          "url": "https://example.org/dist/b18",
+          "category": "images",
+          "template": "default.html",
+          "img_src": "",
+          "score": 82.0,
+          "positions": [1]
+        },
+        {
+          "title": "b19",
+          "url": "https://example.org/dist/b19",
+          "category": "images",
+          "template": "default.html",
+          "img_src": "",
+          "score": 81.0,
+          "positions": [1]
+        },
+        {
+          "title": "a2",
+          "url": "https://example.org/dist/a2",
+          "category": "general",
+          "template": "default.html",
+          "img_src": "",
+          "score": 80.0,
+          "positions": [1]
+        }
+      ],
+      "want": [
+        "https://example.org/dist/a1",
+        "https://example.org/dist/a2",
+        "https://example.org/dist/b1",
+        "https://example.org/dist/b2",
+        "https://example.org/dist/b3",
+        "https://example.org/dist/b4",
+        "https://example.org/dist/b5",
+        "https://example.org/dist/b6",
+        "https://example.org/dist/b7",
+        "https://example.org/dist/b8",
+        "https://example.org/dist/b9",
+        "https://example.org/dist/b10",
+        "https://example.org/dist/b11",
+        "https://example.org/dist/b12",
+        "https://example.org/dist/b13",
+        "https://example.org/dist/b14",
+        "https://example.org/dist/b15",
+        "https://example.org/dist/b16",
+        "https://example.org/dist/b17",
+        "https://example.org/dist/b18",
+        "https://example.org/dist/b19"
+      ]
+    },
+    {
+      "name": "max_distance20_new_group",
+      "comment": "a2 (general) trails 20 positions behind its cluster (len=21, index=1, distance 20 NOT < max_distance=20, results.py L215), so it is appended at the end starting a new cluster: [a1, b1..b20, a2].",
+      "results": [
+        {
+          "title": "a1",
+          "url": "https://example.org/d20/a1",
+          "category": "general",
+          "template": "default.html",
+          "img_src": "",
+          "score": 100.0,
+          "positions": [1]
+        },
+        {
+          "title": "b1",
+          "url": "https://example.org/d20/b1",
+          "category": "images",
+          "template": "default.html",
+          "img_src": "",
+          "score": 99.0,
+          "positions": [1]
+        },
+        {
+          "title": "b2",
+          "url": "https://example.org/d20/b2",
+          "category": "images",
+          "template": "default.html",
+          "img_src": "",
+          "score": 98.0,
+          "positions": [1]
+        },
+        {
+          "title": "b3",
+          "url": "https://example.org/d20/b3",
+          "category": "images",
+          "template": "default.html",
+          "img_src": "",
+          "score": 97.0,
+          "positions": [1]
+        },
+        {
+          "title": "b4",
+          "url": "https://example.org/d20/b4",
+          "category": "images",
+          "template": "default.html",
+          "img_src": "",
+          "score": 96.0,
+          "positions": [1]
+        },
+        {
+          "title": "b5",
+          "url": "https://example.org/d20/b5",
+          "category": "images",
+          "template": "default.html",
+          "img_src": "",
+          "score": 95.0,
+          "positions": [1]
+        },
+        {
+          "title": "b6",
+          "url": "https://example.org/d20/b6",
+          "category": "images",
+          "template": "default.html",
+          "img_src": "",
+          "score": 94.0,
+          "positions": [1]
+        },
+        {
+          "title": "b7",
+          "url": "https://example.org/d20/b7",
+          "category": "images",
+          "template": "default.html",
+          "img_src": "",
+          "score": 93.0,
+          "positions": [1]
+        },
+        {
+          "title": "b8",
+          "url": "https://example.org/d20/b8",
+          "category": "images",
+          "template": "default.html",
+          "img_src": "",
+          "score": 92.0,
+          "positions": [1]
+        },
+        {
+          "title": "b9",
+          "url": "https://example.org/d20/b9",
+          "category": "images",
+          "template": "default.html",
+          "img_src": "",
+          "score": 91.0,
+          "positions": [1]
+        },
+        {
+          "title": "b10",
+          "url": "https://example.org/d20/b10",
+          "category": "images",
+          "template": "default.html",
+          "img_src": "",
+          "score": 90.0,
+          "positions": [1]
+        },
+        {
+          "title": "b11",
+          "url": "https://example.org/d20/b11",
+          "category": "images",
+          "template": "default.html",
+          "img_src": "",
+          "score": 89.0,
+          "positions": [1]
+        },
+        {
+          "title": "b12",
+          "url": "https://example.org/d20/b12",
+          "category": "images",
+          "template": "default.html",
+          "img_src": "",
+          "score": 88.0,
+          "positions": [1]
+        },
+        {
+          "title": "b13",
+          "url": "https://example.org/d20/b13",
+          "category": "images",
+          "template": "default.html",
+          "img_src": "",
+          "score": 87.0,
+          "positions": [1]
+        },
+        {
+          "title": "b14",
+          "url": "https://example.org/d20/b14",
+          "category": "images",
+          "template": "default.html",
+          "img_src": "",
+          "score": 86.0,
+          "positions": [1]
+        },
+        {
+          "title": "b15",
+          "url": "https://example.org/d20/b15",
+          "category": "images",
+          "template": "default.html",
+          "img_src": "",
+          "score": 85.0,
+          "positions": [1]
+        },
+        {
+          "title": "b16",
+          "url": "https://example.org/d20/b16",
+          "category": "images",
+          "template": "default.html",
+          "img_src": "",
+          "score": 84.0,
+          "positions": [1]
+        },
+        {
+          "title": "b17",
+          "url": "https://example.org/d20/b17",
+          "category": "images",
+          "template": "default.html",
+          "img_src": "",
+          "score": 83.0,
+          "positions": [1]
+        },
+        {
+          "title": "b18",
+          "url": "https://example.org/d20/b18",
+          "category": "images",
+          "template": "default.html",
+          "img_src": "",
+          "score": 82.0,
+          "positions": [1]
+        },
+        {
+          "title": "b19",
+          "url": "https://example.org/d20/b19",
+          "category": "images",
+          "template": "default.html",
+          "img_src": "",
+          "score": 81.0,
+          "positions": [1]
+        },
+        {
+          "title": "b20",
+          "url": "https://example.org/d20/b20",
+          "category": "images",
+          "template": "default.html",
+          "img_src": "",
+          "score": 80.0,
+          "positions": [1]
+        },
+        {
+          "title": "a2",
+          "url": "https://example.org/d20/a2",
+          "category": "general",
+          "template": "default.html",
+          "img_src": "",
+          "score": 79.0,
+          "positions": [1]
+        }
+      ],
+      "want": [
+        "https://example.org/d20/a1",
+        "https://example.org/d20/b1",
+        "https://example.org/d20/b2",
+        "https://example.org/d20/b3",
+        "https://example.org/d20/b4",
+        "https://example.org/d20/b5",
+        "https://example.org/d20/b6",
+        "https://example.org/d20/b7",
+        "https://example.org/d20/b8",
+        "https://example.org/d20/b9",
+        "https://example.org/d20/b10",
+        "https://example.org/d20/b11",
+        "https://example.org/d20/b12",
+        "https://example.org/d20/b13",
+        "https://example.org/d20/b14",
+        "https://example.org/d20/b15",
+        "https://example.org/d20/b16",
+        "https://example.org/d20/b17",
+        "https://example.org/d20/b18",
+        "https://example.org/d20/b19",
+        "https://example.org/d20/b20",
+        "https://example.org/d20/a2"
+      ]
+    },
+    {
+      "name": "input_not_mutated",
+      "comment": "Same shape as score_desc but pins the no-mutation contract (scoring.go GetOrderedResults copies the input slice before sorting). The fixture's want array is the ordered output; the test additionally asserts the input slice keeps its original URL order after the call.",
+      "results": [
+        {
+          "title": "low score result",
+          "url": "https://example.org/mut/low",
+          "category": "general",
+          "template": "default.html",
+          "img_src": "",
+          "score": 1.0,
+          "positions": [1]
+        },
+        {
+          "title": "high score result",
+          "url": "https://example.org/mut/high",
+          "category": "general",
+          "template": "default.html",
+          "img_src": "",
+          "score": 9.0,
+          "positions": [1]
+        },
+        {
+          "title": "mid score result",
+          "url": "https://example.org/mut/mid",
+          "category": "general",
+          "template": "default.html",
+          "img_src": "",
+          "score": 5.0,
+          "positions": [1]
+        }
+      ],
+      "want": [
+        "https://example.org/mut/high",
+        "https://example.org/mut/mid",
+        "https://example.org/mut/low"
+      ]
+    }
+  ],
+  "as_dict": {
+    "result": {
+      "title": "Example page",
+      "content": "A snippet with details.",
+      "url": "https://example.org/page?q=1#frag",
+      "thumbnail": "",
+      "img_src": "",
+      "engines": ["google", "bing"],
+      "score": 1.5,
+      "category": "general",
+      "positions": [1, 3],
+      "priority": 1,
+      "template": "default.html"
+    },
+    "want": {
+      "title": "Example page",
+      "content": "A snippet with details.",
+      "url": "https://example.org/page?q=1#frag",
+      "thumbnail": "",
+      "img_src": "",
+      "engines": ["google", "bing"],
+      "score": 1.5,
+      "category": "general",
+      "positions": [1, 3],
+      "priority": 1,
+      "template": "default.html",
+      "parsed_url": ["https", "example.org", "/page", "", "q=1", "frag"]
+    }
+  }
+}

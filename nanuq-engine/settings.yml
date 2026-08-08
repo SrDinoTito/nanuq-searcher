@@ -1,0 +1,146 @@
+# nanuq-server settings (completed in TASK-022).
+# Defaults are code-first (DSG-007): everything here only overrides newConfig().
+
+general:
+  instance_name: "nanuq"
+  enable_metrics: true
+
+search:
+  safe_search: 0
+  autocomplete: ""
+  ban_time_on_fail: 5
+  max_ban_time_on_fail: 120
+  formats: [html, json, csv, rss]
+
+server:
+  port: 8888
+  bind_address: "0.0.0.0"
+  base_url: false
+  limiter: false
+  public_instance: false
+  secret_key: "changeme"
+  image_proxy: false
+
+valkey:
+  url: false
+
+outgoing:
+  request_timeout: 3.0
+  pool_connections: 100
+  pool_maxsize: 20
+  enable_http2: true
+
+# Engine entries (TASK-022). Only engines marked enabled (no disabled/inactive)
+# produce processors; disabled/inactive entries are registered in the catalog
+# as unavailable. Engines requiring API keys or features not yet ported are
+# marked disabled: true. xpath and json_engine need mandatory overrides
+# (search_url + results_xpath / results_query).
+engines:
+  # --- core engines (html scraping, no API keys) ---
+  # wikipedia: keep active. Reported "engine: suspended/access denied" is
+  # usually a transient upstream block (user-agent or IP), not a config issue;
+  # the REST v1 summary API needs no key.
+  - name: wikipedia
+    engine: wikipedia
+    shortcut: wp
+    categories: [general]
+    display_type: ["list"]  # list => main results in the results list
+
+  - name: duckduckgo
+    engine: duckduckgo
+    shortcut: ddg
+    categories: [general]
+
+  - name: brave
+    engine: brave
+    shortcut: br
+    categories: [general]
+
+  # startpage: disabled — get_sc_code not ported (DECISION-002), the endpoint
+  # returns HTML/JS instead of JSON, so results cannot be decoded reliably.
+  - name: startpage
+    engine: startpage
+    shortcut: sp
+    startpage_categ: web
+    categories: [general]
+    disabled: true
+
+  - name: bing_images
+    engine: bing_images
+    shortcut: bii
+    categories: [images]
+
+  - name: bing_news
+    engine: bing_news
+    shortcut: bin
+    categories: [news]
+
+  - name: bing_videos
+    engine: bing_videos
+    shortcut: biv
+    categories: [videos]
+
+  # --- data-driven engine examples ---
+  # xpath engine: requires search_url + results_xpath (mandatory overrides).
+  # bitbucket: disabled — requires an API token (HTTP 401) that is not
+  # configured; entry kept for when a token is available.
+  - name: bitbucket
+    engine: xpath
+    shortcut: bb
+    categories: [general]
+    paging: true
+    search_url: https://bitbucket.org/repo/all/{pageno}?name={query}
+    results_xpath: //article[@class="repo-summary"]
+    url_xpath: //article[@class="repo-summary"]//a[@class="repo-link"]/@href
+    title_xpath: //article[@class="repo-summary"]//a[@class="repo-link"]
+    disabled: true
+
+  # json_engine: requires search_url + results_query (mandatory overrides).
+  - name: rawweb
+    engine: json_engine
+    shortcut: rw
+    categories: [general, blogs]
+    paging: true
+    search_url: 'https://api.rawweb.org/api/search?keyword={query}&page={pageno}&lang=*'
+    results_query: data
+    url_query: link
+    title_query: title
+    content_query: content
+
+  # --- engines disabled / inactive: API key or unported features ---
+  - name: bing
+    engine: bing
+    shortcut: bi
+    categories: [general]
+    disabled: true
+
+  - name: google
+    engine: google
+    shortcut: go
+    categories: [general]
+    inactive: true  # upstream marks google inactive by default
+
+  - name: qwant
+    engine: qwant
+    shortcut: qw
+    qwant_categ: web
+    categories: [general]
+    disabled: true
+
+  - name: mojeek
+    engine: mojeek
+    shortcut: mjk
+    categories: [general]
+    disabled: true
+
+  - name: baidu
+    engine: baidu
+    shortcut: bd
+    baidu_category: general
+    categories: [general]
+    disabled: true
+
+  - name: duckduckgo weather
+    engine: duckduckgo_weather
+    shortcut: ddw
+    disabled: true  # requires a feature not ported yet

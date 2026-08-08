@@ -1,0 +1,66 @@
+{
+  "search.placeholder": {
+    "other": "busca en la web..."
+  },
+  "search.submit": {
+    "other": "Buscar"
+  },
+  "search.title": {
+    "other": "búsqueda"
+  },
+  "results.title": {
+    "other": "resultados de búsqueda"
+  },
+  "results.for_query": {
+    "other": "Resultados para {{.Query}}"
+  },
+  "results.count": {
+    "one": "{{.Count}} resultado para \"{{.Query}}\"",
+    "other": "{{.Count}} resultados para \"{{.Query}}\""
+  },
+  "results.no_results": {
+    "other": "No se encontraron resultados."
+  },
+  "results.unresponsive": {
+    "other": "Motores sin respuesta"
+  },
+  "error.access_denied": {
+    "other": "Acceso denegado"
+  },
+  "error.too_many_requests": {
+    "other": "Demasiadas peticiones"
+  },
+  "error.timeout": {
+    "other": "Tiempo de espera agotado"
+  },
+  "error.cf_browser": {
+    "other": "Desafío de Cloudflare"
+  },
+  "page.title": {
+    "other": "{{.InstanceName}} - búsqueda"
+  },
+  "about.tagline": {
+    "other": "{{.InstanceName}} es un metabuscador privado que respeta tu privacidad."
+  },
+  "preferences.heading": {
+    "other": "Preferencias"
+  },
+  "preferences.back": {
+    "other": "volver a la búsqueda"
+  },
+  "preferences.instance_name": {
+    "other": "Nombre de la instancia"
+  },
+  "stats.heading": {
+    "other": "Estadísticas"
+  },
+  "stats.none": {
+    "other": "Aún no hay estadísticas disponibles."
+  },
+  "stats_errors.heading": {
+    "other": "Errores de motores"
+  },
+  "stats_errors.none": {
+    "other": "No se han registrado errores de motores."
+  }
+}

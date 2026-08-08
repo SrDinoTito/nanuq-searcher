@@ -1,0 +1,69 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-test:
+    name: Build + vet + race + coverage
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: nanuq-searcher-mcp
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: "1.25.5"
+          cache-dependency-path: nanuq-searcher-mcp/go.sum
+
+      - name: go mod tidy (verificación de consistencia)
+        run: |
+          go mod tidy
+          git diff --exit-code -- go.mod go.sum
+
+      - name: Build
+        run: go build ./...
+
+      - name: Vet
+        run: go vet ./...
+
+      - name: Test (race)
+        run: go test ./... -race -count=1
+
+      - name: Coverage
+        run: go test -cover ./... -coverprofile=coverage.out
+
+      - name: Upload coverage artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage
+          path: nanuq-searcher-mcp/coverage.out
+          if-no-files-found: error
+
+  lint:
+    name: golangci-lint
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: nanuq-searcher-mcp
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: "1.25.5"
+          cache-dependency-path: nanuq-searcher-mcp/go.sum
+
+      - name: golangci-lint (v2)
+        run: go run github.com/golangci/golangci-lint/v2/cmd/golangci-lint@v2.1.4 run ./...

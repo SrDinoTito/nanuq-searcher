@@ -1,0 +1,21 @@
+# Binarios
+*.exe
+*.dll
+*.so
+*.test
+*.out
+# Build
+/server
+/dist/
+/coverage.*
+*.coverprofile
+profile.cov
+# Dependencias
+/vendor/
+go.work
+go.work.sum
+# Entorno
+.env
+# IDE
+.idea/
+.vscode/

@@ -1,0 +1,85 @@
+# Fixture for internal/config tests: exercises every modeled section plus
+# engine-specific keys that must fall into EngineConfig.Overrides.
+
+general:
+  instance_name: "nanuq test"
+  debug: true
+  privacypolicy_url: "https://nanuq.example/privacy"
+  donation_url: "https://nanuq.example/donate"
+  contact_url: "https://nanuq.example/contact"
+  enable_metrics: true
+
+brand:
+  docs_url: "https://nanuq.example/docs"
+  public_instances: "https://nanuq.example/instances"
+  wiki_url: "https://nanuq.example/wiki"
+  issue_url: "https://nanuq.example/issues"
+
+search:
+  safe_search: 1
+  autocomplete: "duckduckgo"
+  ban_time_on_fail: 10
+  max_ban_time_on_fail: 300
+  suspended_times:
+    github.com: 3600
+  formats: [html, json, rss]
+
+server:
+  port: 9999
+  bind_address: "0.0.0.0"
+  base_url: false
+  limiter: true
+  public_instance: true
+  secret_key: "test-secret"
+  image_proxy: true
+
+valkey:
+  url: "redis://127.0.0.1:6379/0"
+
+ui:
+  static_path: "/static"
+  templates_path: "/templates"
+  default_theme: "simple"
+  default_locale: "en"
+  hotkeys: "vim"
+  url_formatting: "text"
+  query_in_title: true
+  center_alignment: true
+  search_on_category_select: true
+  theme_args:
+    simple_style: "auto"
+
+preferences:
+  lock: [language, autocomplete]
+
+outgoing:
+  request_timeout: 5.0
+  max_request_timeout: 10.0
+  pool_connections: 200
+  pool_maxsize: 50
+  enable_http2: false
+  proxies:
+    https: ["socks5://127.0.0.1:9050"]
+  using_tor_proxy: false
+  extra_proxy_timeout: 4.0
+  source_ips: ["192.168.1.10"]
+  verify: false
+
+engines:
+  - name: wikipedia
+    engine: wikipedia
+    shortcut: wiki
+    categories: general
+    base_url: "https://en.wikipedia.org"
+    search_url: "https://en.wikipedia.org/w/index.php?search={query}"
+    results_xpath: "//div[@class='mw-search-result-heading']/a"
+    language: "en"
+
+  - name: duckduckgo_extra
+    engine: duckduckgo
+    shortcut: ddgi
+    categories: [images]
+    disabled: true
+    xpath:
+      results_xpath: "//div[contains(@class,'result')]"
+      title_xpath: "//h2/a"

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>nanuq — search results</title>
+</head>
+<body>
+<header>
+  <h1>nanuq</h1>
+  <form method="get" action="/search">
+    <input type="text" name="q" value="{{.Query}}" autofocus>
+    <button type="submit">Search</button>
+  </form>
+</header>
+<main>
+  <p>Results for <strong>{{.Query}}</strong></p>
+  {{if .Unresponsive}}
+  <div class="unresponsive">
+    <h2>Unresponsive engines</h2>
+    <ul>
+      {{range .Unresponsive}}
+      <li class="unresponsive-engine">{{.Name}}: {{.Reason}}</li>
+      {{end}}
+    </ul>
+  </div>
+  {{end}}
+  {{if .Results}}
+  <ol class="results">
+    {{range .Results}}
+    <li class="result">
+      <h2 class="result-title"><a href="{{.URL}}">{{.Title}}</a></h2>
+      <p class="result-url">{{.URL}}</p>
+      <p class="result-content">{{.Content}}</p>
+    </li>
+    {{end}}
+  </ol>
+  {{else}}
+  <p class="no-results">No results found.</p>
+  {{end}}
+</main>
+</body>
+</html>

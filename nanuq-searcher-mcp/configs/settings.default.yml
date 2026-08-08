@@ -1,0 +1,101 @@
+# nanuq-searcher-mcp — settings por defecto del engine (REQ-016).
+#
+# CANÓNICO para el usuario: este archivo. Copia byte-idéntica embebida en
+# internal/config/settings.default.yml (go:embed, REQ-016) que cmd/nanuq-mcp
+# escribe a un archivo temporal cuando no se pasa -config. Mantener AMBOS
+# sincronizados.
+#
+# Formato settings del engine nanuq-engine (ver nanuq-engine/internal/config/
+# settings.go): los 14 módulos registrados (xpath, json_engine + 12 core,
+# según engines.RegisterAll) habilitados (D-04), sin API keys — las keys se
+# inyectan en runtime desde NANUQ_<ENGINE>_API_KEY dentro de
+# nanuq.NewServiceFromFile (REQ-019). Los defaults del engine son code-first
+# (DSG-007): secciones omitidas OK (config.Load usa yaml.Unmarshal sin
+# KnownFields); weight no declarado → default 1.0.
+
+engines:
+  # --- módulos data-driven (necesitan overrides obligatorios) ---
+  - name: bitbucket
+    engine: xpath
+    shortcut: bb
+    categories: [general]
+    paging: true
+    search_url: https://bitbucket.org/repo/all/{pageno}?name={query}
+    results_xpath: //article[@class="repo-summary"]
+    url_xpath: //article[@class="repo-summary"]//a[@class="repo-link"]/@href
+    title_xpath: //article[@class="repo-summary"]//a[@class="repo-link"]
+
+  - name: rawweb
+    engine: json_engine
+    shortcut: rw
+    categories: [general, blogs]
+    paging: true
+    search_url: 'https://api.rawweb.org/api/search?keyword={query}&page={pageno}&lang=*'
+    results_query: data
+    url_query: link
+    title_query: title
+    content_query: content
+
+  # --- core engines (12) ---
+  - name: wikipedia
+    engine: wikipedia
+    shortcut: wp
+    categories: [general]
+
+  - name: duckduckgo
+    engine: duckduckgo
+    shortcut: ddg
+    categories: [general]
+
+  - name: brave
+    engine: brave
+    shortcut: br
+    categories: [general]
+
+  - name: startpage
+    engine: startpage
+    shortcut: sp
+    startpage_categ: web
+    categories: [general]
+
+  - name: bing_images
+    engine: bing_images
+    shortcut: bii
+    categories: [images]
+
+  - name: bing_news
+    engine: bing_news
+    shortcut: bin
+    categories: [news]
+
+  - name: bing_videos
+    engine: bing_videos
+    shortcut: biv
+    categories: [videos]
+
+  - name: bing
+    engine: bing
+    shortcut: bi
+    categories: [general]
+
+  - name: google
+    engine: google
+    shortcut: go
+    categories: [general]
+
+  - name: qwant
+    engine: qwant
+    shortcut: qw
+    qwant_categ: web
+    categories: [general]
+
+  - name: mojeek
+    engine: mojeek
+    shortcut: mjk
+    categories: [general]
+
+  - name: baidu
+    engine: baidu
+    shortcut: bd
+    baidu_category: general
+    categories: [general]

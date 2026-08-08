@@ -1,0 +1,24 @@
+# =============================================================================
+# .dockerignore — excluye del contexto de build lo que no necesita la imagen.
+# Menos contexto = builds más rápidos y evita copiar secretos/artefactos.
+# =============================================================================
+
+# Control de versiones y metadatos de agentes
+.git
+.gitignore
+.agents
+
+# Ejemplos y documentación (la imagen solo necesita código + settings.yml)
+example
+README.md
+
+# Artefactos locales de runtime
+*.db
+*.log
+*.exe
+bin/
+dist/
+
+# Entorno de desarrollo
+.env
+.venv

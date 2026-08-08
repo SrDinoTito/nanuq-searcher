@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{.InstanceName}} - preferences</title>
+</head>
+<body>
+  <header>
+    <h1>{{.InstanceName}}</h1>
+    <nav><a href="/">back to search</a></nav>
+  </header>
+  <main>
+    <h2>Preferences</h2>
+    <!-- TODO (TASK-012c): cookie-based preference persistence arrives in a later phase; this page is informational only. -->
+    <p>Preference settings are not persisted yet. They will be saved in cookies in a later phase.</p>
+    <dl>
+      <dt>Instance name</dt>
+      <dd>{{.InstanceName}}</dd>
+      <dt>Default locale</dt>
+      <dd>{{.DefaultLocale}}</dd>
+      <dt>Autocomplete</dt>
+      <dd>{{.Autocomplete}}</dd>
+      <dt>Safe search</dt>
+      <dd>{{.SafeSearch}}</dd>
+      <dt>Categories</dt>
+      <dd>
+        <ul>
+          {{range .Categories}}
+          <li>{{.}}</li>
+          {{end}}
+        </ul>
+      </dd>
+    </dl>
+  </main>
+</body>
+</html>

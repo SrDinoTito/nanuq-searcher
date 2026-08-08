@@ -1,0 +1,18 @@
+{
+  "trie": {
+    "ddg": {
+      "\u0010": "http://duckduckgo.com/?q=\u0002\u000119",
+      "i": "//duckduckgo.com/?q=\u0002&iax=images&ia=images\u0001762"
+    },
+    ".net": "http://www.searchdotnet.com/results.aspx?q=\u0002\u00015",
+    "g": {
+      "\u0010": "//google.com/search?q=\u0002\u0001",
+      "o": {
+        "l": "//golang.org/search?q=\u0002\u00010"
+      }
+    },
+    "w": {
+      "ikipedia": "//en.wikipedia.org/w/index.php?search=\u0002\u00011"
+    }
+  }
+}

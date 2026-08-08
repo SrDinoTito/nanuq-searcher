@@ -1,0 +1,29 @@
+# =============================================================================
+# docker-compose — nanuq-server (meta-buscador SearXNG en Go, nanuq-engine)
+# -----------------------------------------------------------------------------
+# Levanta el servidor SIEMPRE dentro de un contenedor Docker.
+#
+# Uso:
+#   docker compose up -d --build     # construir imagen y levantar en segundo plano
+#   docker compose logs -f           # ver logs
+#   docker compose down              # detener y eliminar el contenedor
+# =============================================================================
+
+services:
+  nanuq-server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: nanuq-engine:latest
+    container_name: nanuq-server
+    # Mapea el puerto 8888 del host al 8888 del contenedor (HTTP del servidor).
+    ports:
+      - "8888:8888"
+    # Reinicio automático: el contenedor vuelve a arrancar si el proceso
+    # muere o si Docker daemon se reinicia.
+    restart: always
+    # Config externa opcional: si editas settings.yml en el host, montala para
+    # que el contenedor la use sin recompilar la imagen.
+    # (Comentado por defecto: settings.yml ya se copia dentro de la imagen.)
+    # volumes:
+    #   - ./settings.yml:/app/settings.yml:ro

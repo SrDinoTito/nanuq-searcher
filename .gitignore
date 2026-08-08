@@ -1,0 +1,23 @@
+# Repos anidados / referencias externas
+example/
+
+# Binarios
+*.exe
+*.dll
+*.so
+*.test
+*.out
+
+# Cobertura
+coverage.*
+*.coverprofile
+
+# Entorno
+.env
+
+# IDE
+.idea/
+.vscode/
+
+# Specs internos del agente
+.agents/
