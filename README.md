@@ -1,9 +1,20 @@
-# nanuq-searcher
+<p align="center">
+  <img src="_resources/nanuq-searcher.png" alt="nanuq-searcher" width="160">
+</p>
+
+<h1 align="center">nanuq-searcher</h1>
+
+<p align="center">
+  <img alt="Go 1.25.5+" src="https://img.shields.io/badge/Go-1.25.5+-00ADD8?logo=go&logoColor=white">
+  <img alt="Apache 2.0" src="https://img.shields.io/badge/License-Apache%202.0-blue">
+  <img alt="v0.1.0" src="https://img.shields.io/badge/version-0.1.0-orange">
+  <img alt="MCP stdio" src="https://img.shields.io/badge/MCP-stdio-6A5ACD">
+</p>
 
 > Motor de búsqueda multi-engine (Go) + servidor MCP con salida limpia en Markdown para agentes de IA.
 > Workspace local: `nanuq-sercher`.
 
-Creado por **SrDinoTito** · Licencia: Apache 2.0
+<p align="center">Creado por <strong>SrDinoTito</strong> · Licencia: Apache 2.0</p>
 
 ## ¿Qué es esto?
 

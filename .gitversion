@@ -1,6 +1,7 @@
 {
-  "version": "[0.1.0]",
+  "version": "[0.1.1]",
   "changelog": [
-    "[0.1.0] feat: nanuq-sercher: motor de búsqueda multi-engine + servidor MCP + docs — 2026-08-08 02:55"
+    "[0.1.0] feat: nanuq-sercher: motor de búsqueda multi-engine + servidor MCP + docs — 2026-08-08 02:55",
+    "[0.1.1] docs: README: cabecera profesional con logo y badges — 2026-08-12 09:56"
   ]
 }
